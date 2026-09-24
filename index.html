@@ -21,6 +21,7 @@ body{
   font-family:'Poppins',sans-serif;
   font-size:14px;line-height:1.75;color:var(--ink);
   background:#eef4ee;padding:20px;
+  overflow-x:hidden;
 }
 .bg{
   position:fixed;inset:0;z-index:-1;
@@ -28,6 +29,170 @@ body{
     radial-gradient(circle at 10% 20%,rgba(67,160,71,.12),transparent 45%),
     radial-gradient(circle at 90% 80%,rgba(21,101,192,.12),transparent 45%);
 }
+
+/* ============================================================
+   LOCK SCREEN
+============================================================ */
+.lock-screen{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(135deg,#04230f 0%,#061a3f 50%,#1e40af 100%);
+  display:flex;justify-content:center;align-items:center;padding:20px;
+  transition:opacity .7s ease, visibility .7s;
+}
+.lock-screen.hide{opacity:0;visibility:hidden;pointer-events:none}
+.lock-box{
+  background:rgba(255,255,255,.98);
+  border-radius:24px;
+  padding:50px 55px;
+  max-width:440px;width:100%;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  text-align:center;
+  border:1px solid rgba(255,255,255,.3);
+  animation:lockPop .6s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes lockPop{
+  from{opacity:0;transform:scale(.85) translateY(30px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+.lock-icon{
+  font-size:70px;
+  margin-bottom:18px;
+  display:inline-block;
+  animation:lockFloat 3s ease-in-out infinite;
+  filter:drop-shadow(0 10px 30px rgba(27,94,32,.4));
+}
+@keyframes lockFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-12px) rotate(3deg)}
+}
+.lock-box h2{
+  font-family:'Playfair Display',serif;
+  font-size:28px;color:var(--g900);
+  margin-bottom:10px;
+}
+.lock-box p{
+  text-align:center;
+  color:#666;font-size:14px;
+  margin-bottom:26px;
+}
+.lock-input{
+  width:100%;
+  padding:15px 20px;
+  font-size:16px;
+  font-family:'Poppins',sans-serif;
+  border:2px solid #e0e8e2;
+  border-radius:12px;
+  outline:none;
+  transition:.3s;
+  text-align:center;
+  letter-spacing:2px;
+  background:#fafdf7;
+}
+.lock-input:focus{
+  border-color:var(--g500);
+  box-shadow:0 0 0 4px rgba(67,160,71,.15);
+}
+.lock-input.error{
+  border-color:var(--red);
+  animation:shakeInput .4s ease;
+}
+@keyframes shakeInput{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-10px)}
+  75%{transform:translateX(10px)}
+}
+.lock-btn{
+  width:100%;
+  padding:15px;
+  font-size:16px;font-weight:700;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  background:linear-gradient(135deg,var(--g700),var(--b700));
+  border:none;border-radius:12px;
+  cursor:pointer;margin-top:14px;
+  transition:.3s;
+  box-shadow:0 8px 22px rgba(27,94,32,.35);
+}
+.lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(27,94,32,.5);
+}
+.lock-error{
+  color:var(--red);
+  font-size:13px;
+  font-weight:600;
+  margin-top:14px;
+  min-height:20px;
+  opacity:0;
+  transition:.3s;
+}
+.lock-error.show{opacity:1}
+.lock-hint{
+  font-size:12px;
+  color:#999;
+  margin-top:18px;
+  font-style:italic;
+}
+
+/* ============================================================
+   LIGHTBOX
+============================================================ */
+.lightbox{
+  position:fixed;inset:0;z-index:99998;
+  background:rgba(0,0,0,.92);
+  backdrop-filter:blur(10px);
+  display:none;justify-content:center;align-items:center;
+  padding:30px;
+  cursor:zoom-out;
+  animation:fadeIn .3s ease;
+}
+.lightbox.active{display:flex}
+.lightbox img{
+  max-width:95%;
+  max-height:90vh;
+  border-radius:14px;
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
+  animation:zoomIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes zoomIn{
+  from{opacity:0;transform:scale(.7)}
+  to{opacity:1;transform:scale(1)}
+}
+.lightbox .lb-close{
+  position:absolute;top:24px;right:30px;
+  background:rgba(255,255,255,.15);
+  border:2px solid rgba(255,255,255,.4);
+  color:#fff;width:50px;height:50px;
+  border-radius:50%;font-size:24px;
+  cursor:pointer;transition:.3s;
+  display:flex;align-items:center;justify-content:center;
+}
+.lightbox .lb-close:hover{
+  background:#e53935;border-color:#e53935;
+  transform:rotate(90deg) scale(1.1);
+}
+.lightbox .lb-caption{
+  position:absolute;bottom:24px;left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.95);
+  color:var(--g900);
+  padding:12px 28px;
+  border-radius:30px;
+  font-size:14px;font-weight:600;
+  max-width:80%;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.lightbox .lb-hint{
+  position:absolute;top:30px;left:30px;
+  color:rgba(255,255,255,.7);
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+/* ============================================================
+   NAVBAR
+============================================================ */
 .navbar{
   position:sticky;top:12px;z-index:999;
   background:rgba(255,255,255,.85);
@@ -48,6 +213,9 @@ body{
 }
 .navbar button.print{
   background:linear-gradient(135deg,var(--amber),#ff6f00);color:#fff;
+}
+.navbar button.lock-btn-nav{
+  background:rgba(229,57,53,.12);color:#b71c1c;
 }
 .view{display:none}
 .view.active{display:block;animation:fadeIn .5s ease}
@@ -106,7 +274,7 @@ td{padding:11px 14px;border-bottom:1px solid #e3f0e6}
 tr:nth-child(even) td{background:#f6fbf7}
 
 /* ============================================================
-   IMAGE STYLES — REAL PHOTOS
+   CLICKABLE IMAGES
 ============================================================ */
 .real-photo{
   width:100%;
@@ -116,12 +284,36 @@ tr:nth-child(even) td{background:#f6fbf7}
   margin:18px 0 6px;
   box-shadow:var(--sh-md);
   display:block;
+  cursor:zoom-in;
   transition:transform .4s ease, box-shadow .4s ease;
+  position:relative;
 }
 .real-photo:hover{
   transform:scale(1.02);
   box-shadow:0 18px 44px rgba(10,46,20,.25);
 }
+.real-photo:hover::after{
+  content:'🔍 Click to enlarge';
+  position:absolute;top:12px;right:12px;
+  background:rgba(0,0,0,.75);color:#fff;
+  padding:6px 14px;border-radius:20px;
+  font-size:12px;font-weight:600;
+}
+.img-wrapper{
+  position:relative;
+  display:block;
+}
+.img-wrapper::after{
+  content:'🔍 Click to zoom';
+  position:absolute;top:26px;right:14px;
+  background:rgba(0,0,0,.75);color:#fff;
+  padding:6px 14px;border-radius:20px;
+  font-size:11px;font-weight:600;
+  opacity:0;transition:.3s;pointer-events:none;
+  letter-spacing:.5px;
+}
+.img-wrapper:hover::after{opacity:1}
+
 .img-caption{
   text-align:center;
   font-size:13px;
@@ -136,25 +328,13 @@ tr:nth-child(even) td{background:#f6fbf7}
 }
 .img-caption strong{color:var(--g900);font-style:normal}
 
-/* Illustration fallback */
-.illustration{
-  width:100%;height:220px;border-radius:14px;margin:18px 0;
-  box-shadow:var(--sh-md);overflow:hidden;position:relative;
-  display:flex;align-items:center;justify-content:center;
-}
-.illus-air{background:linear-gradient(180deg,#b0bec5,#607d8b);}
-.illus-water{background:linear-gradient(180deg,#4fc3f7,#013e6e);}
-.illus-soil{background:linear-gradient(180deg,#8d6e63,#3e2723);}
-.illus-noise{background:linear-gradient(180deg,#7e57c2,#311b92);}
-.illustration .emoji{font-size:64px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
 .pollution-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0;
 }
 .pollution-grid .img-card{
   border-radius:14px;overflow:hidden;box-shadow:var(--sh-md);
   position:relative;height:160px;transition:transform .4s ease;
+  cursor:zoom-in;
 }
 .pollution-grid .img-card:hover{transform:translateY(-6px) scale(1.03)}
 .pollution-grid .img-card img{
@@ -166,6 +346,14 @@ tr:nth-child(even) td{background:#f6fbf7}
   padding:5px 14px;border-radius:20px;font-size:12px;
   font-weight:600;backdrop-filter:blur(6px);
 }
+.pollution-grid .img-card .zoom-hint{
+  position:absolute;top:8px;right:8px;
+  background:rgba(255,255,255,.9);color:var(--g900);
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;opacity:0;transition:.3s;
+}
+.pollution-grid .img-card:hover .zoom-hint{opacity:1}
 
 .fact{
   background:linear-gradient(135deg,#fff8e1,#fffde7);
@@ -225,65 +413,30 @@ tr:nth-child(even) td{background:#f6fbf7}
 .index-table td:first-child{width:60px;text-align:center;font-weight:700;color:var(--g700)}
 .index-table td:last-child{width:90px;text-align:center;font-weight:600}
 
-/* ============================================================
-   BIBLIOGRAPHY — DETAILED STYLE
-============================================================ */
 .bib-card{
   background:linear-gradient(135deg,#f6fbf7,#e8f5e9);
   border-left:5px solid var(--g500);
-  padding:16px 20px;
-  margin:14px 0;
-  border-radius:10px;
-  box-shadow:var(--sh-sm);
-  transition:transform .3s ease,box-shadow .3s ease;
+  padding:16px 20px;margin:14px 0;border-radius:10px;
+  box-shadow:var(--sh-sm);transition:transform .3s ease,box-shadow .3s ease;
 }
-.bib-card:hover{
-  transform:translateX(8px);
-  box-shadow:var(--sh-md);
-}
+.bib-card:hover{transform:translateX(8px);box-shadow:var(--sh-md)}
 .bib-card .bib-num{
   display:inline-block;
   background:linear-gradient(135deg,var(--g700),var(--b700));
-  color:#fff;
-  width:30px;height:30px;
-  border-radius:50%;
-  text-align:center;
-  line-height:30px;
-  font-weight:700;
-  font-size:14px;
-  margin-right:12px;
-  vertical-align:top;
+  color:#fff;width:30px;height:30px;border-radius:50%;
+  text-align:center;line-height:30px;font-weight:700;
+  font-size:14px;margin-right:12px;vertical-align:top;
 }
-.bib-card .bib-content{
-  display:inline-block;
-  width:calc(100% - 50px);
-  vertical-align:top;
-}
-.bib-card .bib-title{
-  font-weight:700;
-  color:var(--g900);
-  font-size:15px;
-  margin-bottom:4px;
-}
-.bib-card .bib-detail{
-  font-size:13px;
-  color:#444;
-  line-height:1.6;
-  margin-bottom:4px;
-}
+.bib-card .bib-content{display:inline-block;width:calc(100% - 50px);vertical-align:top}
+.bib-card .bib-title{font-weight:700;color:var(--g900);font-size:15px;margin-bottom:4px}
+.bib-card .bib-detail{font-size:13px;color:#444;line-height:1.6;margin-bottom:4px}
 .bib-card .bib-use{
-  font-size:12.5px;
-  color:var(--b700);
-  font-style:italic;
-  padding:6px 10px;
-  background:rgba(255,255,255,.7);
-  border-radius:6px;
-  display:inline-block;
-  margin-top:6px;
+  font-size:12.5px;color:var(--b700);font-style:italic;
+  padding:6px 10px;background:rgba(255,255,255,.7);
+  border-radius:6px;display:inline-block;margin-top:6px;
 }
 .bib-card .bib-use strong{color:var(--g900);font-style:normal}
 
-/* Slides */
 .slide-deck{max-width:980px;margin:0 auto}
 .slide{
   background:linear-gradient(135deg,#ffffff,#e8f5e9);
@@ -313,7 +466,7 @@ tr:nth-child(even) td{background:#f6fbf7}
 
 @media print{
   body{background:#fff!important;padding:0}
-  .bg,.navbar{display:none!important}
+  .bg,.navbar,.lock-screen,.lightbox{display:none!important}
   .page,.slide{box-shadow:none!important;margin:0!important;border-radius:0!important;page-break-after:always}
   .view{display:none!important}
   .view.active{display:block!important}
@@ -324,7 +477,7 @@ tr:nth-child(even) td{background:#f6fbf7}
 @media (max-width:700px){
   body{padding:10px}
   .navbar{border-radius:20px;padding:10px}
-  .navbar button{padding:8px 14px;font-size:12px}
+  .navbar button{padding:8px 12px;font-size:11px}
   .page{padding:30px 22px}
   .slide{padding:35px 25px;min-height:auto}
   .slide h1{font-size:30px}
@@ -336,10 +489,37 @@ tr:nth-child(even) td{background:#f6fbf7}
   .case{flex-direction:column}
   .real-photo{height:200px}
   .bib-card .bib-content{width:100%;margin-top:8px}
+  .lock-box{padding:35px 25px}
+  .lightbox .lb-close{top:14px;right:14px;width:42px;height:42px;font-size:20px}
 }
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     LOCK SCREEN
+============================================================ -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-box">
+    <span class="lock-icon">🔒</span>
+    <h2>Protected Project</h2>
+    <p>Enter password to view the project</p>
+    <input type="password" class="lock-input" id="lockInput" placeholder="Enter password" autocomplete="off" onkeypress="if(event.key==='Enter')checkPassword()">
+    <button class="lock-btn" onclick="checkPassword()">🔓 Unlock Project</button>
+    <div class="lock-error" id="lockError">❌ Wrong password. Try again.</div>
+    <div class="lock-hint">Hint: It's an English word</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LIGHTBOX
+============================================================ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lb-hint">🔍 Enlarged View</span>
+  <button class="lb-close" onclick="closeLightbox(event)">✕</button>
+  <img id="lightboxImg" src="" alt="Enlarged view">
+  <div class="lb-caption" id="lightboxCaption"></div>
+</div>
 
 <div class="bg"></div>
 
@@ -347,12 +527,12 @@ tr:nth-child(even) td{background:#f6fbf7}
   <button id="btnDoc" class="active" onclick="showView('doc')">📄 Document</button>
   <button id="btnPpt" onclick="showView('ppt')">🎞️ Slides</button>
   <button class="print" onclick="window.print()">🖨️ Print / PDF</button>
+  <button class="lock-btn-nav" onclick="lockProject()">🔒 Lock</button>
 </div>
 
 <!-- ============ DOCUMENT VIEW ============ -->
 <div id="viewDoc" class="view active">
 
-  <!-- Header -->
   <div class="page">
     <div class="page-header">
       <h1>Impact of Pollution on Human Health</h1>
@@ -366,23 +546,26 @@ tr:nth-child(even) td{background:#f6fbf7}
       </div>
     </div>
 
-    <!-- Pollution Overview Grid with REAL PHOTOS -->
     <div class="pollution-grid">
-      <div class="img-card">
+      <div class="img-card" onclick="openLightbox('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1200&q=80','Air Pollution — Industrial smoke')">
         <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80" alt="Air Pollution">
         <span class="label">🌫️ Air Pollution</span>
+        <span class="zoom-hint">🔍</span>
       </div>
-      <div class="img-card">
+      <div class="img-card" onclick="openLightbox('https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=1200&q=80','Water Pollution — Contaminated river')">
         <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=600&q=80" alt="Water Pollution">
         <span class="label">💧 Water Pollution</span>
+        <span class="zoom-hint">🔍</span>
       </div>
-      <div class="img-card">
+      <div class="img-card" onclick="openLightbox('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1200&q=80','Soil Pollution — Garbage dump')">
         <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80" alt="Soil Pollution">
         <span class="label">🌱 Soil Pollution</span>
+        <span class="zoom-hint">🔍</span>
       </div>
-      <div class="img-card">
+      <div class="img-card" onclick="openLightbox('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&q=80','Noise Pollution — Traffic jam')">
         <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600&q=80" alt="Noise Pollution">
         <span class="label">🔊 Noise Pollution</span>
+        <span class="zoom-hint">🔍</span>
       </div>
     </div>
 
@@ -404,20 +587,20 @@ tr:nth-child(even) td{background:#f6fbf7}
     </table>
   </div>
 
-  <!-- Introduction with REAL PHOTO (Traffic + Smoke) -->
   <div class="page">
     <h2 class="section-title">1. INTRODUCTION</h2>
-
-    <img src="https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?w=800&q=80"
-         alt="Urban pollution - traffic and smoke"
-         class="real-photo">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?w=1200&q=80"
+           alt="Urban pollution - traffic and smoke"
+           class="real-photo"
+           onclick="openLightbox(this.src, 'Heavy traffic and toxic smoke covering an urban city')">
+    </div>
     <p class="img-caption"><strong>Fig 1:</strong> Heavy traffic and toxic smoke covering an urban city — a common sight in developing cities.</p>
 
     <p>Urbanization and industrialization have transformed modern cities but have also brought a serious threat — <strong>pollution</strong>. Every day, millions of people in urban areas breathe polluted air, drink contaminated water, live on polluted soil, and endure constant noise. These forms of pollution silently damage human health, causing both short-term illnesses and long-term diseases.</p>
     <p>According to the <strong>World Health Organization (WHO)</strong>, pollution is responsible for nearly <strong>7 million deaths every year</strong> worldwide, with the majority occurring in urban and industrial regions. This project aims to study the impact of <strong>air, water, soil, and noise pollution</strong> on human health in an urban area.</p>
   </div>
 
-  <!-- Objectives -->
   <div class="page">
     <h2 class="section-title">2. OBJECTIVES</h2>
     <ol>
@@ -429,15 +612,16 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ol>
   </div>
 
-  <!-- Types with REAL PHOTOS -->
   <div class="page">
     <h2 class="section-title">3. TYPES OF POLLUTION & HEALTH EFFECTS</h2>
 
-    <!-- AIR POLLUTION — Factory Smoke Photo -->
     <h3 class="sub-title">💨 A. AIR POLLUTION</h3>
-    <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80"
-         alt="Factory smoke stacks releasing pollution"
-         class="real-photo">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1200&q=80"
+           alt="Factory smoke"
+           class="real-photo"
+           onclick="openLightbox(this.src, 'Industrial factories releasing thick smoke into the atmosphere')">
+    </div>
     <p class="img-caption"><strong>Fig 2:</strong> Industrial factories releasing thick smoke into the atmosphere — a major source of air pollution.</p>
     <p><strong>Sources:</strong> Vehicles, factories, construction dust, burning of garbage, firecrackers.</p>
     <p><strong>Major Pollutants:</strong> PM2.5, PM10, CO, SO₂, NO₂, Lead.</p>
@@ -451,11 +635,13 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ul>
     <div class="fact"><strong>💡 Fact:</strong> Air pollution is the 5th leading risk factor for death in India (Lancet Report).</div>
 
-    <!-- WATER POLLUTION — Dirty Water Photo -->
     <h3 class="sub-title">💧 B. WATER POLLUTION</h3>
-    <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&q=80"
-         alt="Polluted water with dead fish and waste"
-         class="real-photo">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=1200&q=80"
+           alt="Water pollution"
+           class="real-photo"
+           onclick="openLightbox(this.src, 'Polluted river water with industrial waste and dead fish')">
+    </div>
     <p class="img-caption"><strong>Fig 3:</strong> Polluted river water with industrial waste and dead fish — unfit for any use.</p>
     <p><strong>Sources:</strong> Industrial effluents, sewage, pesticides, plastic waste, oil spills.</p>
     <p><strong>Major Pollutants:</strong> Bacteria, heavy metals (lead, mercury, arsenic), nitrates, microplastics.</p>
@@ -469,11 +655,13 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ul>
     <div class="fact"><strong>💡 Fact:</strong> Over 2 billion people worldwide drink contaminated water (WHO).</div>
 
-    <!-- SOIL POLLUTION — Garbage Dump Photo -->
     <h3 class="sub-title">🌱 C. SOIL POLLUTION</h3>
-    <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80"
-         alt="Garbage dump on soil"
-         class="real-photo">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1200&q=80"
+           alt="Soil pollution"
+           class="real-photo"
+           onclick="openLightbox(this.src, 'Improper garbage dumping on land — contaminating soil and groundwater')">
+    </div>
     <p class="img-caption"><strong>Fig 4:</strong> Improper garbage dumping on land — contaminating soil and groundwater.</p>
     <p><strong>Sources:</strong> Chemical fertilizers, pesticides, industrial waste, plastic, e-waste.</p>
     <p><strong>Major Pollutants:</strong> Heavy metals, hydrocarbons, pesticides, radioactive waste.</p>
@@ -487,11 +675,13 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ul>
     <div class="fact"><strong>💡 Fact:</strong> Contaminated soil enters the food chain and affects humans indirectly.</div>
 
-    <!-- NOISE POLLUTION — Traffic Jam Photo -->
     <h3 class="sub-title">🔊 D. NOISE POLLUTION</h3>
-    <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80"
-         alt="Heavy traffic noise in the city"
-         class="real-photo">
+    <div class="img-wrapper">
+      <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&q=80"
+           alt="Noise pollution"
+           class="real-photo"
+           onclick="openLightbox(this.src, 'Heavy traffic jams produce continuous honking and engine noise')">
+    </div>
     <p class="img-caption"><strong>Fig 5:</strong> Heavy traffic jams produce continuous honking and engine noise — a major urban noise source.</p>
     <p><strong>Sources:</strong> Traffic, loudspeakers, construction, industries, airports.</p>
     <p><strong>Safe Limit:</strong> 55 dB (day), 45 dB (night) — as per CPCB.</p>
@@ -506,7 +696,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="fact"><strong>💡 Fact:</strong> Long exposure to sounds above 85 dB can cause permanent hearing damage.</div>
   </div>
 
-  <!-- Methodology -->
   <div class="page">
     <h2 class="section-title">4. METHODOLOGY</h2>
     <table>
@@ -520,7 +709,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     </table>
   </div>
 
-  <!-- Questionnaire -->
   <div class="page">
     <h2 class="section-title">5. QUESTIONNAIRE</h2>
     <ol>
@@ -537,7 +725,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ol>
   </div>
 
-  <!-- Data -->
   <div class="page">
     <h2 class="section-title">6. DATA COLLECTION & OBSERVATION</h2>
     <p><strong>Study Area:</strong> [Name of City/Locality] &nbsp; | &nbsp; <strong>Sample Size:</strong> 100 residents</p>
@@ -551,7 +738,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     <p><strong>Observation:</strong> Air pollution was found to be the most harmful, followed by water and noise pollution.</p>
   </div>
 
-  <!-- Case Studies -->
   <div class="page">
     <h2 class="section-title">7. CASE STUDIES</h2>
     <div class="case">
@@ -583,7 +769,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     </div>
   </div>
 
-  <!-- Charts -->
   <div class="page">
     <h2 class="section-title">8. CHARTS & GRAPHS</h2>
     <h3 class="sub-title">📊 Bar Graph – Pollution Affecting Residents</h3>
@@ -605,7 +790,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     </div>
   </div>
 
-  <!-- Results -->
   <div class="page">
     <h2 class="section-title">9. RESULTS & FINDINGS</h2>
     <ol>
@@ -618,7 +802,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ol>
   </div>
 
-  <!-- Preventive -->
   <div class="page">
     <h2 class="section-title">10. PREVENTIVE MEASURES</h2>
     <table>
@@ -632,18 +815,13 @@ tr:nth-child(even) td{background:#f6fbf7}
     <p><strong>👥 Citizen Role:</strong> Responsible behavior, tree plantation, waste segregation.</p>
   </div>
 
-  <!-- Conclusion -->
   <div class="page">
     <h2 class="section-title">11. CONCLUSION</h2>
     <p>Pollution is a serious threat to human health in urban areas. Air, water, soil, and noise pollution together affect the physical and mental well-being of people. Among all, <strong>air pollution</strong> was found to be the most harmful in the study area. By adopting preventive measures and spreading awareness, we can reduce pollution and build healthier, cleaner cities for future generations.</p>
   </div>
 
-  <!-- ============================================================
-       BIBLIOGRAPHY — FULLY EXPLAINED (2 pages)
-  ============================================================ -->
   <div class="page">
     <h2 class="section-title">12. BIBLIOGRAPHY (EXPLAINED)</h2>
-
     <p style="margin-bottom:20px;">A bibliography is a list of all the sources — books, websites, reports, newspapers, and journals — that were referred to while preparing this project. Each source is explained below with what information it provided and how it was used in this study.</p>
 
     <div class="bib-card">
@@ -710,7 +888,6 @@ tr:nth-child(even) td{background:#f6fbf7}
     </div>
   </div>
 
-  <!-- Bibliography Summary -->
   <div class="page">
     <h2 class="section-title">WHY BIBLIOGRAPHY IS IMPORTANT</h2>
     <p>A bibliography serves several important purposes in a research project:</p>
@@ -742,7 +919,9 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="slide">
       <span class="badge">Introduction</span>
       <h2>What is Pollution?</h2>
-      <img src="https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?w=800&q=80" alt="Urban pollution" class="real-photo" style="height:200px">
+      <div class="img-wrapper">
+        <img src="https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?w=1200&q=80" alt="Urban pollution" class="real-photo" style="height:200px" onclick="openLightbox(this.src,'Urban pollution — traffic and smoke')">
+      </div>
       <p>Pollution is the contamination of the natural environment by harmful substances, causing adverse changes.</p>
       <ul>
         <li>Rapid urbanization & industrialization</li>
@@ -754,7 +933,9 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="slide">
       <span class="badge">Air Pollution</span>
       <h2>💨 Air Pollution & Health</h2>
-      <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80" alt="Factory smoke" class="real-photo" style="height:200px">
+      <div class="img-wrapper">
+        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1200&q=80" alt="Factory smoke" class="real-photo" style="height:200px" onclick="openLightbox(this.src,'Air pollution from industries')">
+      </div>
       <h3>Health Effects</h3>
       <ul>
         <li>Asthma & bronchitis</li>
@@ -768,7 +949,9 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="slide">
       <span class="badge">Water Pollution</span>
       <h2>💧 Water Pollution & Health</h2>
-      <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&q=80" alt="Water pollution" class="real-photo" style="height:200px">
+      <div class="img-wrapper">
+        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=1200&q=80" alt="Water pollution" class="real-photo" style="height:200px" onclick="openLightbox(this.src,'Water pollution — contaminated river')">
+      </div>
       <h3>Health Effects</h3>
       <ul>
         <li>Cholera, typhoid, dysentery</li>
@@ -782,7 +965,9 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="slide">
       <span class="badge">Soil Pollution</span>
       <h2>🌱 Soil Pollution & Health</h2>
-      <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80" alt="Soil pollution" class="real-photo" style="height:200px">
+      <div class="img-wrapper">
+        <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1200&q=80" alt="Soil pollution" class="real-photo" style="height:200px" onclick="openLightbox(this.src,'Soil pollution — garbage dump')">
+      </div>
       <h3>Health Effects</h3>
       <ul>
         <li>Food poisoning from contaminated crops</li>
@@ -796,7 +981,9 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="slide">
       <span class="badge">Noise Pollution</span>
       <h2>🔊 Noise Pollution & Health</h2>
-      <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80" alt="Noise pollution" class="real-photo" style="height:200px">
+      <div class="img-wrapper">
+        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&q=80" alt="Noise pollution" class="real-photo" style="height:200px" onclick="openLightbox(this.src,'Noise pollution — traffic jam')">
+      </div>
       <h3>Health Effects</h3>
       <ul>
         <li>Hearing loss</li>
@@ -843,6 +1030,75 @@ tr:nth-child(even) td{background:#f6fbf7}
 </div>
 
 <script>
+/* ==================== PASSWORD LOCK ==================== */
+const CORRECT_PASSWORD = "wrongly";
+const SESSION_KEY = "pollution_project_unlocked";
+
+function checkPassword(){
+  const input = document.getElementById('lockInput');
+  const error = document.getElementById('lockError');
+  const entered = input.value.trim().toLowerCase();
+
+  if(entered === CORRECT_PASSWORD){
+    // Correct password
+    sessionStorage.setItem(SESSION_KEY, "yes");
+    document.getElementById('lockScreen').classList.add('hide');
+    input.classList.remove('error');
+    error.classList.remove('show');
+    input.value = '';
+  } else {
+    // Wrong password
+    input.classList.add('error');
+    error.classList.add('show');
+    setTimeout(()=>input.classList.remove('error'), 500);
+    input.value = '';
+    input.focus();
+  }
+}
+
+function lockProject(){
+  sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById('lockScreen').classList.remove('hide');
+  document.getElementById('lockInput').value = '';
+  document.getElementById('lockInput').focus();
+}
+
+// Check if already unlocked in this session
+window.addEventListener('DOMContentLoaded', () => {
+  if(sessionStorage.getItem(SESSION_KEY) === "yes"){
+    document.getElementById('lockScreen').classList.add('hide');
+  } else {
+    setTimeout(()=>document.getElementById('lockInput').focus(), 400);
+  }
+});
+
+/* ==================== LIGHTBOX ==================== */
+function openLightbox(src, caption){
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const cap = document.getElementById('lightboxCaption');
+  img.src = src;
+  cap.textContent = caption || '';
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e){
+  // Close if clicking background or close button (not the image)
+  if(e && e.target.id === 'lightboxImg') return;
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    closeLightbox();
+  }
+});
+
+/* ==================== VIEW SWITCHER ==================== */
 function showView(view){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.navbar button').forEach(b=>b.classList.remove('active'));
@@ -858,4 +1114,4 @@ function showView(view){
 </script>
 
 </body>
-                                                                                               </html>
+  </html>
