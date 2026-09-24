@@ -60,11 +60,9 @@ body{
   border-image:linear-gradient(90deg,var(--g500),var(--b500),var(--amber)) 1;
 }
 .page-header{
-  text-align:center;
-  padding:40px 30px;
+  text-align:center;padding:40px 30px;
   background:linear-gradient(135deg,#e8f5e9,#e3f2fd);
-  border-radius:var(--r);
-  margin-bottom:30px;
+  border-radius:var(--r);margin-bottom:30px;
 }
 .page-header h1{
   font-family:'Playfair Display',serif;font-size:30px;color:var(--g900);
@@ -107,6 +105,234 @@ th{
 td{padding:11px 14px;border-bottom:1px solid #e3f0e6}
 tr:nth-child(even) td{background:#f6fbf7}
 
+/* ============================================================
+   IMAGE / ILLUSTRATION STYLES
+============================================================ */
+.illustration{
+  width:100%;
+  height:220px;
+  border-radius:14px;
+  margin:18px 0;
+  box-shadow:var(--sh-md);
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* AIR POLLUTION – Smoky cityscape */
+.illus-air{
+  background:linear-gradient(180deg,#b0bec5 0%,#90a4ae 40%,#607d8b 100%);
+  position:relative;
+}
+.illus-air::before{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:60%;
+  background:
+    linear-gradient(180deg,transparent 0%,rgba(38,50,56,.3) 100%),
+    repeating-linear-gradient(90deg,
+      transparent 0 25px,#37474f 25px 60px,
+      transparent 60px 90px,#455a64 90px 130px,
+      transparent 130px 160px,#37474f 160px 200px,
+      transparent 200px 230px,#455a64 230px 270px,
+      transparent 270px 300px,#37474f 300px 340px);
+  clip-path:polygon(0 100%,0 40%,25px 40%,25px 60%,60px 60%,60px 20%,90px 20%,90px 55%,130px 55%,130px 35%,160px 35%,160px 70%,200px 70%,200px 25%,230px 25%,230px 50%,270px 50%,270px 15%,300px 15%,300px 100%);
+}
+.illus-air::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 40%,rgba(120,120,120,.7),transparent 40%),
+    radial-gradient(circle at 70% 50%,rgba(90,90,90,.6),transparent 40%),
+    radial-gradient(circle at 50% 20%,rgba(70,70,70,.5),transparent 35%);
+  animation:smokeDrift 8s ease-in-out infinite alternate;
+}
+@keyframes smokeDrift{
+  0%{transform:translateX(0) scale(1)}
+  100%{transform:translateX(-15px) scale(1.1)}
+}
+.illus-air .emoji{
+  font-size:64px;position:relative;z-index:2;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* WATER POLLUTION – Murky water */
+.illus-water{
+  background:linear-gradient(180deg,#4fc3f7 0%,#0277bd 40%,#01579b 70%,#013e6e 100%);
+  position:relative;
+}
+.illus-water::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 80%,rgba(76,175,80,.6),transparent 25%),
+    radial-gradient(circle at 60% 30%,rgba(120,100,60,.5),transparent 20%),
+    radial-gradient(circle at 80% 70%,rgba(180,120,60,.4),transparent 20%),
+    radial-gradient(circle at 40% 50%,rgba(50,50,50,.4),transparent 15%);
+  animation:bubbleRise 6s ease-in-out infinite;
+}
+.illus-water::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;height:30%;
+  background:repeating-linear-gradient(90deg,
+    transparent 0 20px,rgba(255,255,255,.15) 20px 40px,transparent 40px 60px);
+  animation:waveMove 5s linear infinite;
+}
+@keyframes bubbleRise{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes waveMove{0%{background-position:0 0}100%{background-position:60px 0}}
+.illus-water .emoji{
+  font-size:64px;position:relative;z-index:2;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  animation:float 4.5s ease-in-out infinite;
+}
+
+/* SOIL POLLUTION – Brown earth */
+.illus-soil{
+  background:linear-gradient(180deg,#8d6e63 0%,#5d4037 50%,#3e2723 100%);
+  position:relative;
+}
+.illus-soil::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 15% 30%,rgba(255,193,7,.4),transparent 8%),
+    radial-gradient(circle at 40% 60%,rgba(139,195,74,.3),transparent 10%),
+    radial-gradient(circle at 70% 40%,rgba(255,87,34,.3),transparent 8%),
+    radial-gradient(circle at 85% 70%,rgba(156,39,176,.3),transparent 8%),
+    radial-gradient(circle at 55% 85%,rgba(33,150,243,.3),transparent 8%);
+  animation:toxinFloat 5s ease-in-out infinite alternate;
+}
+@keyframes toxinFloat{0%{transform:translate(0,0)}100%{transform:translate(8px,-8px)}}
+.illus-soil .emoji{
+  font-size:64px;position:relative;z-index:2;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  animation:float 5s ease-in-out infinite;
+}
+
+/* NOISE POLLUTION – Sound waves */
+.illus-noise{
+  background:linear-gradient(180deg,#7e57c2 0%,#512da8 50%,#311b92 100%);
+  position:relative;
+  overflow:hidden;
+}
+.illus-noise::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:20px;height:20px;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,.7);
+  transform:translate(-50%,-50%);
+  animation:ripple 2.5s ease-out infinite;
+}
+.illus-noise::after{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  width:20px;height:20px;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,.5);
+  transform:translate(-50%,-50%);
+  animation:ripple 2.5s ease-out infinite .8s;
+}
+@keyframes ripple{
+  0%{width:20px;height:20px;opacity:1;border-width:4px}
+  100%{width:300px;height:300px;opacity:0;border-width:1px}
+}
+.illus-noise .emoji{
+  font-size:64px;position:relative;z-index:2;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  animation:shake .3s ease-in-out infinite;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-3px) rotate(-2deg)}
+  75%{transform:translateX(3px) rotate(2deg)}
+}
+
+/* HEALTH IMPACT – Heart/pulse */
+.illus-health{
+  background:linear-gradient(135deg,#ef5350 0%,#c62828 100%);
+  position:relative;
+}
+.illus-health::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.15),transparent 60%);
+}
+.illus-health .emoji{
+  font-size:64px;position:relative;z-index:2;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  animation:heartbeat 1.2s ease-in-out infinite;
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  15%{transform:scale(1.15)}
+  30%{transform:scale(1)}
+  45%{transform:scale(1.1)}
+}
+
+/* Image caption */
+.img-caption{
+  text-align:center;
+  font-size:13px;
+  color:#555;
+  font-style:italic;
+  margin-top:-8px;
+  margin-bottom:18px;
+}
+
+/* Real photo placeholder slot */
+.photo-slot{
+  width:100%;
+  height:220px;
+  border-radius:14px;
+  border:3px dashed #b0bec5;
+  background:linear-gradient(135deg,#f5f5f5,#e0e0e0);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:#78909c;
+  font-size:14px;
+  font-weight:500;
+  margin:18px 0;
+  text-align:center;
+  padding:20px;
+  gap:8px;
+}
+.photo-slot .icon{font-size:40px;opacity:.6}
+.photo-slot small{font-size:11px;color:#90a4ae}
+
+/* Grid of pollution images */
+.pollution-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin:22px 0;
+}
+.pollution-grid .illustration{height:160px;margin:0}
+.pollution-grid .emoji{font-size:48px!important}
+.pollution-grid .label{
+  position:absolute;
+  bottom:10px;left:10px;
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  z-index:3;
+}
+
 .fact{
   background:linear-gradient(135deg,#fff8e1,#fffde7);
   border-left:5px solid var(--amber);padding:14px 18px;margin:14px 0;
@@ -118,7 +344,16 @@ tr:nth-child(even) td{background:#f6fbf7}
   background:linear-gradient(135deg,#e3f2fd,#e8eaf6);
   border-left:5px solid var(--b700);padding:18px 22px;margin:16px 0;
   border-radius:10px;box-shadow:var(--sh-sm);
+  display:flex;gap:18px;align-items:flex-start;
 }
+.case .case-icon{
+  font-size:36px;flex-shrink:0;
+  width:60px;height:60px;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;border-radius:12px;
+  box-shadow:var(--sh-sm);
+}
+.case .case-body{flex:1}
 .case h4{color:var(--b900);margin-bottom:6px;font-size:16px}
 
 .chart{
@@ -148,8 +383,7 @@ tr:nth-child(even) td{background:#f6fbf7}
 .pie-chart{
   width:220px;height:220px;border-radius:50%;
   background:conic-gradient(#c62828 0deg 162deg,#1565c0 162deg 252deg,#6a1b9a 252deg 324deg,#4e342e 324deg 360deg);
-  box-shadow:var(--sh-md),0 0 0 8px #fff inset;
-  position:relative;
+  box-shadow:var(--sh-md),0 0 0 8px #fff inset;position:relative;
 }
 .pie-chart::after{content:'';position:absolute;inset:32%;background:#fff;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,.1)}
 .pie-legend{font-size:15px}
@@ -160,6 +394,7 @@ tr:nth-child(even) td{background:#f6fbf7}
 .index-table td:last-child{width:90px;text-align:center;font-weight:600}
 .bib li{margin-bottom:8px}
 
+/* Slides */
 .slide-deck{max-width:980px;margin:0 auto}
 .slide{
   background:linear-gradient(135deg,#ffffff,#e8f5e9);
@@ -177,10 +412,7 @@ tr:nth-child(even) td{background:#f6fbf7}
   color:#fff;padding:7px 20px;border-radius:30px;font-size:13px;
   font-weight:700;margin-bottom:18px;letter-spacing:1.5px;text-transform:uppercase;
 }
-.slide-cover{
-  background:linear-gradient(135deg,#1b5e20,#0d47a1);color:#fff;
-  text-align:center;border-left:10px solid var(--amber);
-}
+.slide-cover{background:linear-gradient(135deg,#1b5e20,#0d47a1);color:#fff;text-align:center;border-left:10px solid var(--amber)}
 .slide-cover h1{color:#fff;font-size:48px}
 .slide-cover p{color:#e0f2f1;font-size:20px;text-align:center;margin-bottom:15px}
 .slide .flex-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:25px}
@@ -212,6 +444,8 @@ tr:nth-child(even) td{background:#f6fbf7}
   .slide p,.slide li{font-size:15px}
   .flex-grid{grid-template-columns:1fr!important}
   .pie-wrap{flex-direction:column;gap:25px}
+  .pollution-grid{grid-template-columns:1fr!important}
+  .case{flex-direction:column}
 }
 </style>
 </head>
@@ -242,6 +476,26 @@ tr:nth-child(even) td{background:#f6fbf7}
       </div>
     </div>
 
+    <!-- Pollution Overview Grid -->
+    <div class="pollution-grid">
+      <div class="illustration illus-air">
+        <span class="emoji">🌫️</span>
+        <span class="label">Air Pollution</span>
+      </div>
+      <div class="illustration illus-water">
+        <span class="emoji">💧</span>
+        <span class="label">Water Pollution</span>
+      </div>
+      <div class="illustration illus-soil">
+        <span class="emoji">🌱</span>
+        <span class="label">Soil Pollution</span>
+      </div>
+      <div class="illustration illus-noise">
+        <span class="emoji">🔊</span>
+        <span class="label">Noise Pollution</span>
+      </div>
+    </div>
+
     <h2 class="section-title">INDEX</h2>
     <table class="index-table">
       <tr><th>S. No.</th><th>Topic</th><th>Page No.</th></tr>
@@ -263,6 +517,14 @@ tr:nth-child(even) td{background:#f6fbf7}
   <!-- Introduction -->
   <div class="page">
     <h2 class="section-title">1. INTRODUCTION</h2>
+
+    <!-- Real photo placeholder -->
+    <div class="photo-slot">
+      <span class="icon">📸</span>
+      <span>Paste your city pollution photo here</span>
+      <small>Tip: Right-click image → Save → Replace this slot</small>
+    </div>
+
     <p>Urbanization and industrialization have transformed modern cities but have also brought a serious threat — <strong>pollution</strong>. Every day, millions of people in urban areas breathe polluted air, drink contaminated water, live on polluted soil, and endure constant noise. These forms of pollution silently damage human health, causing both short-term illnesses and long-term diseases.</p>
     <p>According to the <strong>World Health Organization (WHO)</strong>, pollution is responsible for nearly <strong>7 million deaths every year</strong> worldwide, with the majority occurring in urban and industrial regions. This project aims to study the impact of <strong>air, water, soil, and noise pollution</strong> on human health in an urban area.</p>
   </div>
@@ -279,11 +541,15 @@ tr:nth-child(even) td{background:#f6fbf7}
     </ol>
   </div>
 
-  <!-- Types -->
+  <!-- Types with illustrations -->
   <div class="page">
     <h2 class="section-title">3. TYPES OF POLLUTION & HEALTH EFFECTS</h2>
 
     <h3 class="sub-title">💨 A. AIR POLLUTION</h3>
+    <div class="illustration illus-air">
+      <span class="emoji">🏭</span>
+    </div>
+    <p class="img-caption">Fig 1: Smog and smoke rising over a crowded city</p>
     <p><strong>Sources:</strong> Vehicles, factories, construction dust, burning of garbage, firecrackers.</p>
     <p><strong>Major Pollutants:</strong> PM2.5, PM10, CO, SO₂, NO₂, Lead.</p>
     <h4>Health Effects:</h4>
@@ -297,6 +563,10 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="fact"><strong>💡 Fact:</strong> Air pollution is the 5th leading risk factor for death in India (Lancet Report).</div>
 
     <h3 class="sub-title">💧 B. WATER POLLUTION</h3>
+    <div class="illustration illus-water">
+      <span class="emoji">🚱</span>
+    </div>
+    <p class="img-caption">Fig 2: Contaminated water flowing with industrial waste</p>
     <p><strong>Sources:</strong> Industrial effluents, sewage, pesticides, plastic waste, oil spills.</p>
     <p><strong>Major Pollutants:</strong> Bacteria, heavy metals (lead, mercury, arsenic), nitrates, microplastics.</p>
     <h4>Health Effects:</h4>
@@ -310,6 +580,10 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="fact"><strong>💡 Fact:</strong> Over 2 billion people worldwide drink contaminated water (WHO).</div>
 
     <h3 class="sub-title">🌱 C. SOIL POLLUTION</h3>
+    <div class="illustration illus-soil">
+      <span class="emoji">🪣</span>
+    </div>
+    <p class="img-caption">Fig 3: Toxic chemicals and waste seeping into the soil</p>
     <p><strong>Sources:</strong> Chemical fertilizers, pesticides, industrial waste, plastic, e-waste.</p>
     <p><strong>Major Pollutants:</strong> Heavy metals, hydrocarbons, pesticides, radioactive waste.</p>
     <h4>Health Effects:</h4>
@@ -323,6 +597,10 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="fact"><strong>💡 Fact:</strong> Contaminated soil enters the food chain and affects humans indirectly.</div>
 
     <h3 class="sub-title">🔊 D. NOISE POLLUTION</h3>
+    <div class="illustration illus-noise">
+      <span class="emoji">📢</span>
+    </div>
+    <p class="img-caption">Fig 4: Loud traffic and construction noise in urban areas</p>
     <p><strong>Sources:</strong> Traffic, loudspeakers, construction, industries, airports.</p>
     <p><strong>Safe Limit:</strong> 55 dB (day), 45 dB (night) — as per CPCB.</p>
     <h4>Health Effects:</h4>
@@ -381,26 +659,35 @@ tr:nth-child(even) td{background:#f6fbf7}
     <p><strong>Observation:</strong> Air pollution was found to be the most harmful, followed by water and noise pollution.</p>
   </div>
 
-  <!-- Case Studies -->
+  <!-- Case Studies with icons -->
   <div class="page">
     <h2 class="section-title">7. CASE STUDIES</h2>
     <div class="case">
-      <h4>🌫️ Case Study 1: Air Pollution in Delhi</h4>
-      <p><strong>Situation:</strong> Delhi recorded AQI above 400 (severe) in winter 2023.</p>
-      <p><strong>Effect:</strong> Rise in asthma and respiratory cases by 30% in hospitals.</p>
-      <p><strong>Action:</strong> Odd-even vehicle scheme, construction bans.</p>
+      <div class="case-icon">🌫️</div>
+      <div class="case-body">
+        <h4>Case Study 1: Air Pollution in Delhi</h4>
+        <p><strong>Situation:</strong> Delhi recorded AQI above 400 (severe) in winter 2023.</p>
+        <p><strong>Effect:</strong> Rise in asthma and respiratory cases by 30% in hospitals.</p>
+        <p><strong>Action:</strong> Odd-even vehicle scheme, construction bans.</p>
+      </div>
     </div>
     <div class="case">
-      <h4>🌊 Case Study 2: Water Pollution in Ganga</h4>
-      <p><strong>Situation:</strong> Industrial waste discharged into the river.</p>
-      <p><strong>Effect:</strong> Skin diseases and stomach infections among riverside residents.</p>
-      <p><strong>Action:</strong> Namami Gange Programme.</p>
+      <div class="case-icon">🌊</div>
+      <div class="case-body">
+        <h4>Case Study 2: Water Pollution in Ganga</h4>
+        <p><strong>Situation:</strong> Industrial waste discharged into the river.</p>
+        <p><strong>Effect:</strong> Skin diseases and stomach infections among riverside residents.</p>
+        <p><strong>Action:</strong> Namami Gange Programme.</p>
+      </div>
     </div>
     <div class="case">
-      <h4>🔊 Case Study 3: Noise Pollution in Mumbai</h4>
-      <p><strong>Situation:</strong> High traffic and construction noise.</p>
-      <p><strong>Effect:</strong> Increased cases of hypertension and insomnia.</p>
-      <p><strong>Action:</strong> Silence zones near hospitals and schools.</p>
+      <div class="case-icon">🔊</div>
+      <div class="case-body">
+        <h4>Case Study 3: Noise Pollution in Mumbai</h4>
+        <p><strong>Situation:</strong> High traffic and construction noise.</p>
+        <p><strong>Effect:</strong> Increased cases of hypertension and insomnia.</p>
+        <p><strong>Action:</strong> Silence zones near hospitals and schools.</p>
+      </div>
     </div>
   </div>
 
@@ -453,9 +740,13 @@ tr:nth-child(even) td{background:#f6fbf7}
     <p><strong>👥 Citizen Role:</strong> Responsible behavior, tree plantation, waste segregation.</p>
   </div>
 
-  <!-- Conclusion -->
+  <!-- Conclusion with health illustration -->
   <div class="page">
     <h2 class="section-title">11. CONCLUSION</h2>
+    <div class="illustration illus-health">
+      <span class="emoji">❤️‍🩹</span>
+    </div>
+    <p class="img-caption">Fig 5: Pollution takes a toll on human health</p>
     <p>Pollution is a serious threat to human health in urban areas. Air, water, soil, and noise pollution together affect the physical and mental well-being of people. Among all, <strong>air pollution</strong> was found to be the most harmful in the study area. By adopting preventive measures and spreading awareness, we can reduce pollution and build healthier, cleaner cities for future generations.</p>
   </div>
 
@@ -491,46 +782,19 @@ tr:nth-child(even) td{background:#f6fbf7}
     <div class="slide">
       <span class="badge">Introduction</span>
       <h2>What is Pollution?</h2>
-      <p>Pollution is the contamination of the natural environment by harmful substances, causing adverse changes.</p>
-      <h3>🌆 Urban Pollution Crisis</h3>
-      <ul>
-        <li>Rapid urbanization & industrialization</li>
-        <li>Millions exposed to polluted air, water & soil daily</li>
-        <li><strong>7 million deaths/year</strong> due to pollution (WHO)</li>
-      </ul>
-      <span class="slide-num">Slide 2</span>
-    </div>
-
-    <div class="slide">
-      <span class="badge">Objectives</span>
-      <h2>Our Study Aims To…</h2>
-      <ol>
-        <li>Identify major pollution types in urban areas</li>
-        <li>Study health effects of air, water, soil, noise pollution</li>
-        <li>Collect resident health data</li>
-        <li>Analyze the most harmful pollution</li>
-        <li>Suggest preventive measures</li>
-      </ol>
-      <span class="slide-num">Slide 3</span>
-    </div>
-
-    <div class="slide">
-      <span class="badge">Overview</span>
-      <h2>4 Types of Pollution</h2>
-      <div class="flex-grid">
-        <div class="card"><h3>💨 Air Pollution</h3><p>Vehicles, factories, dust</p></div>
-        <div class="card"><h3>💧 Water Pollution</h3><p>Sewage, industries, plastic</p></div>
-        <div class="card"><h3>🌱 Soil Pollution</h3><p>Fertilizers, e-waste, chemicals</p></div>
-        <div class="card"><h3>🔊 Noise Pollution</h3><p>Traffic, loudspeakers, construction</p></div>
+      <div class="pollution-grid">
+        <div class="illustration illus-air"><span class="emoji">🌫️</span><span class="label">Air</span></div>
+        <div class="illustration illus-water"><span class="emoji">💧</span><span class="label">Water</span></div>
+        <div class="illustration illus-soil"><span class="emoji">🌱</span><span class="label">Soil</span></div>
+        <div class="illustration illus-noise"><span class="emoji">🔊</span><span class="label">Noise</span></div>
       </div>
-      <span class="slide-num">Slide 4</span>
+      <span class="slide-num">Slide 2</span>
     </div>
 
     <div class="slide">
       <span class="badge">Air Pollution</span>
       <h2>💨 Air Pollution & Health</h2>
-      <h3>Sources</h3>
-      <p>Vehicles, factories, construction dust, garbage burning</p>
+      <div class="illustration illus-air"><span class="emoji">🏭</span></div>
       <h3>Health Effects</h3>
       <ul>
         <li>Asthma & bronchitis</li>
@@ -538,15 +802,13 @@ tr:nth-child(even) td{background:#f6fbf7}
         <li>Heart attack & stroke</li>
         <li>Reduced lung function in children</li>
       </ul>
-      <p style="margin-top:15px;color:#c62828"><strong>⚠️ Fact:</strong> 5th leading risk factor for death in India</p>
-      <span class="slide-num">Slide 5</span>
+      <span class="slide-num">Slide 3</span>
     </div>
 
     <div class="slide">
       <span class="badge">Water Pollution</span>
       <h2>💧 Water Pollution & Health</h2>
-      <h3>Sources</h3>
-      <p>Industrial effluents, sewage, pesticides, plastic waste</p>
+      <div class="illustration illus-water"><span class="emoji">🚱</span></div>
       <h3>Health Effects</h3>
       <ul>
         <li>Cholera, typhoid, dysentery</li>
@@ -554,15 +816,13 @@ tr:nth-child(even) td{background:#f6fbf7}
         <li>Skin diseases</li>
         <li>Kidney & liver damage</li>
       </ul>
-      <p style="margin-top:15px;color:#1565c0"><strong>⚠️ Fact:</strong> 2 billion people drink contaminated water (WHO)</p>
-      <span class="slide-num">Slide 6</span>
+      <span class="slide-num">Slide 4</span>
     </div>
 
     <div class="slide">
       <span class="badge">Soil Pollution</span>
       <h2>🌱 Soil Pollution & Health</h2>
-      <h3>Sources</h3>
-      <p>Chemical fertilizers, pesticides, industrial waste, e-waste</p>
+      <div class="illustration illus-soil"><span class="emoji">🪣</span></div>
       <h3>Health Effects</h3>
       <ul>
         <li>Food poisoning from contaminated crops</li>
@@ -570,15 +830,13 @@ tr:nth-child(even) td{background:#f6fbf7}
         <li>Nervous system disorders</li>
         <li>Hormonal imbalance</li>
       </ul>
-      <p style="margin-top:15px;color:#4e342e"><strong>⚠️ Fact:</strong> Contaminated soil enters the food chain</p>
-      <span class="slide-num">Slide 7</span>
+      <span class="slide-num">Slide 5</span>
     </div>
 
     <div class="slide">
       <span class="badge">Noise Pollution</span>
       <h2>🔊 Noise Pollution & Health</h2>
-      <h3>Sources</h3>
-      <p>Traffic, loudspeakers, construction, industries</p>
+      <div class="illustration illus-noise"><span class="emoji">📢</span></div>
       <h3>Health Effects</h3>
       <ul>
         <li>Hearing loss</li>
@@ -586,45 +844,19 @@ tr:nth-child(even) td{background:#f6fbf7}
         <li>Insomnia & sleep disturbance</li>
         <li>Stress, anxiety, depression</li>
       </ul>
-      <p style="margin-top:15px;color:#6a1b9a"><strong>⚠️ Fact:</strong> Sound above 85 dB can permanently damage hearing</p>
-      <span class="slide-num">Slide 8</span>
+      <span class="slide-num">Slide 6</span>
     </div>
 
     <div class="slide">
       <span class="badge">Survey Data</span>
-      <h2>📊 Residents Affected by Pollution</h2>
+      <h2>📊 Residents Affected</h2>
       <div class="chart">
         <div class="bar-row"><span class="bar-label">💨 Air</span><div class="bar-track"><div class="bar-fill air">45%</div></div></div>
         <div class="bar-row"><span class="bar-label">💧 Water</span><div class="bar-track"><div class="bar-fill water">25%</div></div></div>
         <div class="bar-row"><span class="bar-label">🔊 Noise</span><div class="bar-track"><div class="bar-fill noise">20%</div></div></div>
         <div class="bar-row"><span class="bar-label">🌱 Soil</span><div class="bar-track"><div class="bar-fill soil">10%</div></div></div>
       </div>
-      <p style="text-align:center;margin-top:15px"><strong>Sample Size:</strong> 100 residents</p>
-      <span class="slide-num">Slide 9</span>
-    </div>
-
-    <div class="slide">
-      <span class="badge">Case Studies</span>
-      <h2>Real-World Examples</h2>
-      <div class="flex-grid">
-        <div class="card"><h3>🌫️ Delhi Air</h3><p>AQI 400+ in 2023 → 30% rise in asthma cases</p></div>
-        <div class="card"><h3>🌊 Ganga Water</h3><p>Industrial waste → skin & stomach diseases</p></div>
-        <div class="card"><h3>🔊 Mumbai Noise</h3><p>Traffic noise → hypertension & insomnia</p></div>
-      </div>
-      <span class="slide-num">Slide 10</span>
-    </div>
-
-    <div class="slide">
-      <span class="badge">Findings</span>
-      <h2>🔍 Key Results</h2>
-      <ul>
-        <li>Air pollution = most harmful in urban areas</li>
-        <li>45% residents had respiratory problems</li>
-        <li>25% suffered water-borne diseases</li>
-        <li>20% had noise-related stress</li>
-        <li>Children & elderly most affected</li>
-      </ul>
-      <span class="slide-num">Slide 11</span>
+      <span class="slide-num">Slide 7</span>
     </div>
 
     <div class="slide">
@@ -636,15 +868,15 @@ tr:nth-child(even) td{background:#f6fbf7}
         <div class="card"><h3>🌱 Soil</h3><p>Organic fertilizers, recycle</p></div>
         <div class="card"><h3>🔊 Noise</h3><p>No honking, silence zones</p></div>
       </div>
-      <span class="slide-num">Slide 12</span>
+      <span class="slide-num">Slide 8</span>
     </div>
 
     <div class="slide slide-cover">
       <h1>🌿 Conclusion</h1>
-      <p style="margin-top:25px">Pollution is a serious threat to urban health. Air pollution is the most harmful.</p>
-      <p>By adopting preventive measures and spreading awareness, we can build <strong>healthier, cleaner cities</strong> for future generations.</p>
+      <p style="margin-top:25px">Pollution is a serious threat to urban health.</p>
+      <p>By adopting preventive measures and spreading awareness, we can build <strong>healthier, cleaner cities</strong>.</p>
       <p style="margin-top:50px;font-size:26px;font-weight:700">Thank You! 🙏</p>
-      <span class="slide-num" style="color:#e0f2f1">Slide 13</span>
+      <span class="slide-num" style="color:#e0f2f1">Slide 9</span>
     </div>
 
   </div>
@@ -666,4 +898,4 @@ function showView(view){
 </script>
 
 </body>
-                              </html>
+  </html>
